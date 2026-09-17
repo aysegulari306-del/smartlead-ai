@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head><meta charset="UTF-8"><title>AKTİS - Panel</title></head>
+<body>
+  <h1>Lead Listesi</h1>
+  <table border="1" id="tablo"></table>
+  <script>
+    fetch('/api/leads').then(r => r.json()).then(data => {
+      let html = '<tr><th>Isim</th><th>Telefon</th><th>Mesaj</th><th>Tarih</th></tr>';
+      data.leadler.forEach(l => {
+        html += `<tr><td>${l.isim}</td><td>${l.telefon}</td><td>${l.mesaj||''}</td><td>${l.tarih}</td></tr>`;
+      });
+      document.getElementById('tablo').innerHTML = html;
+    });
+  </script>
+</body>
+</html>

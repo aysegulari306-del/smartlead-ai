@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head><meta charset="UTF-8"><title>AKTİS - Sohbet</title></head>
+<body>
+  <h1>AKTİS Asistanı</h1>
+  <input id="mesajGirdi" placeholder="Mesajınız...">
+  <button onclick="sor()">Sor</button>
+  <p id="yanitAlani"></p>
+
+  <script>
+    async function sor() {
+      const mesaj = document.getElementById('mesajGirdi').value;
+      const res = await fetch('/api/sohbet', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({mesaj: mesaj})
+      });
+      const data = await res.json();
+      document.getElementById('yanitAlani').innerText = data.cevap || data.hata;
+    }
+  </script>
+</body>
+</html>
