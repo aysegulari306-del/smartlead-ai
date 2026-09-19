@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    """Tüm ortamlar için ortak ayarlar"""
     SECRET_KEY = os.environ.get('SECRET_KEY', 'varsayilan-anahtar')
     DATABASE_URL = os.environ.get('DATABASE_URL', 'aktis.db')
     GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '')
@@ -33,3 +32,4 @@ config_by_name = {
     'development': DevelopmentConfig,
     'production': ProductionConfig
 }
+

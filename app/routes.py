@@ -58,3 +58,4 @@ def leadleri_getir():
     except Exception as e:
         return jsonify({"basari": False, "hata": str(e)}), 500
     
+    

@@ -21,3 +21,4 @@ def create_app():
         return jsonify({"durum": "aktif"}), 200
 
     return app
+

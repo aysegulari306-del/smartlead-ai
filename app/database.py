@@ -3,7 +3,6 @@ from flask import g, current_app
 
 
 def get_db():
-    """Veritabanı bağlantısını açar; satırlara sütun adıyla erişim sağlar"""
     if 'db' not in g:
         g.db = sqlite3.connect(current_app.config['DATABASE_URL'])
         g.db.row_factory = sqlite3.Row
@@ -17,7 +16,6 @@ def close_db(e=None):
 
 
 def init_db(app):
-    """leads tablosunu oluşturur (yoksa)"""
     with app.app_context():
         db = get_db()
         db.execute('''
@@ -35,7 +33,6 @@ def init_db(app):
 
 
 def lead_ekle(isim, telefon, mesaj=None, ilgi_alani=None):
-    """Yeni lead kaydı ekler. SQL injection'a karşı ? yer tutucusu kullanılır."""
     db = get_db()
     cursor = db.execute(
         'INSERT INTO leads (isim, telefon, mesaj, ilgi_alani) VALUES (?, ?, ?, ?)',
@@ -46,7 +43,8 @@ def lead_ekle(isim, telefon, mesaj=None, ilgi_alani=None):
 
 
 def tum_leadler():
-    """Tüm kayıtları en yeniden eskiye getirir"""
     db = get_db()
     rows = db.execute('SELECT * FROM leads ORDER BY tarih DESC').fetchall()
     return [dict(row) for row in rows]
+
+
